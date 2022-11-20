@@ -1,0 +1,19 @@
+.listWrapper {
+  position: relative;
+
+  .arrow {
+    z-index: 3;
+    position: absolute;
+    cursor: pointer;
+
+    &.left {
+      left: -40px;
+      top: 50%;
+    }
+
+    &.right {
+      right: -30px;
+      top: 50%;
+    }
+  }
+}

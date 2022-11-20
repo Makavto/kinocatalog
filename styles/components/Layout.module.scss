@@ -1,0 +1,20 @@
+@import '/styles/global/variables.scss';
+
+.baseLayout {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 100vh;
+}
+
+.menuWrapper {
+  height: 100%;
+  background: $menu-background;
+  flex: .2 1 20%;
+}
+
+.pageWrapper {
+  padding: 50px 60px;
+  height: 100%;
+  background: $page-background;
+  flex: .8 1 80%;
+}

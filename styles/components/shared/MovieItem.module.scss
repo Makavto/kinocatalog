@@ -1,0 +1,48 @@
+@import '/styles/global/variables.scss';
+
+.movieItemCard {
+  width: 170px;
+  height: 100%;
+  background: $grey-background-2;
+  display: flex;
+  flex-direction: column;
+
+  &Poster {
+    width: 100%;
+    height: auto;
+  }
+
+  &Body {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  &Title {
+    margin-bottom: .2rem;
+    font-size: .9rem;
+  }
+
+  &Rating {
+    margin-bottom: .4rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    .normal {
+      margin-left: .2rem;
+      font-size: 1.1rem;
+      line-height: 1.1rem;
+    }
+
+    .small {
+      font-size: .6rem;
+      align-self: flex-start;
+    }
+  }
+
+  &Year {
+    font-size: .7rem;
+    color: $primary-color-dark;
+  }
+}
