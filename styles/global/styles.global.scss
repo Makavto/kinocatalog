@@ -65,3 +65,18 @@ button {
 .swiper-slide {
   height: auto;
 }
+
+.searchBlock {
+  position: relative;
+
+  button {
+    position: absolute;
+    right: 0;
+    max-width: 130px;
+  }
+}
+
+.movieItemWrapper {
+  margin-right: 2rem;
+  margin-bottom: 2rem;
+}

@@ -4,6 +4,7 @@ import styles from '../../styles/components/shared/MovieItem.module.scss';
 import Great from "../Icons/Great";
 import Normal from "../Icons/Normal";
 import Awful from "../Icons/Awful";
+import Link from "next/link";
 
 interface IMovieItemProps {
   name: string,
@@ -14,7 +15,7 @@ interface IMovieItemProps {
 
 function MovieItem({ name, posterUrl, year, rating }: IMovieItemProps) {
   return (
-    <div className={styles.movieItemCard}>
+    <Link href={'/films/1'} className={styles.movieItemCard}>
       <Image src={posterUrl} alt="Постер" className={styles.movieItemCardPoster} width={150} height={225}/>
       <div className={styles.movieItemCardBody}>
         <div className={styles.movieItemCardRating}>
@@ -33,7 +34,7 @@ function MovieItem({ name, posterUrl, year, rating }: IMovieItemProps) {
         <h5 className={styles.movieItemCardTitle}>{name}</h5>
         <span className={styles.movieItemCardYear}>({year})</span>
       </div>
-    </div>
+    </Link>
   );
 }
 

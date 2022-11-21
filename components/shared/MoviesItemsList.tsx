@@ -28,7 +28,7 @@ function MoviesItemsList() {
         onInit={(e) => {
           setSwiper(e)
         }}
-        modules={[Navigation, Pagination, Scrollbar, A11y]}
+        modules={[Navigation, Pagination, Scrollbar]}
         breakpoints = {{
           1800: {
             slidesPerView: 6
