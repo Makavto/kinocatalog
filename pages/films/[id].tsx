@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { filmMock } from "../../mocks/film.mock";
 import styles from "../../styles/pages/films/FilmPage.module.scss";
 
@@ -26,7 +25,6 @@ function FilmPage() {
           </h2>
         </div>
       </div>
-      <Link href={'/films'}>Back</Link>
       <div className={styles.descrBlock}>
         <Image className={styles.poster} src={film.posterUrl} alt='Постер' width={667} height={1000} />
         <div className={styles.textBlock}>

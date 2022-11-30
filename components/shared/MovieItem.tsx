@@ -5,17 +5,41 @@ import Great from "../Icons/Great";
 import Normal from "../Icons/Normal";
 import Awful from "../Icons/Awful";
 import Link from "next/link";
+import { MovieTypeEnum } from "../../types/enums/MovieType.enum";
 
 interface IMovieItemProps {
   name: string,
   posterUrl: string,
   year: string,
-  rating: string
+  rating: string,
+  type: MovieTypeEnum
 }
 
-function MovieItem({ name, posterUrl, year, rating }: IMovieItemProps) {
+function MovieItem({ name, posterUrl, year, rating, type }: IMovieItemProps) {
+  let navigationUrl: string;
+  switch (type) {
+    case MovieTypeEnum.FILM:
+      navigationUrl = '/films/1'
+      break;
+
+    case MovieTypeEnum.MINI_SERIES:
+      navigationUrl = '/series/mini/1'
+      break;
+
+    case MovieTypeEnum.TV_SERIES:
+      navigationUrl = '/series/1'
+      break;
+
+    case MovieTypeEnum.TV_SHOW:
+      navigationUrl = '/series/tv/1'
+      break;
+  
+    default:
+      navigationUrl = ''
+      break;
+  }
   return (
-    <Link href={'/films/1'} className={styles.movieItemCard}>
+    <Link href={navigationUrl} className={styles.movieItemCard}>
       <Image src={posterUrl} alt="Постер" className={styles.movieItemCardPoster} width={150} height={225}/>
       <div className={styles.movieItemCardBody}>
         <div className={styles.movieItemCardRating}>

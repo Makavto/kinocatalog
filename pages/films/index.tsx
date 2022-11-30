@@ -2,6 +2,7 @@ import MovieItem from "../../components/shared/MovieItem";
 import MoviesItemsList from "../../components/shared/MoviesItemsList";
 import { topFilmsMock } from "../../mocks/topFilms.mock";
 import styles from "../../styles/pages/films/Index.module.scss";
+import { MovieTypeEnum } from "../../types/enums/MovieType.enum";
 
 function Films() {
   return (
@@ -24,6 +25,7 @@ function Films() {
                 year={film.year}
                 rating={film.rating}
                 posterUrl={film.posterUrlPreview}
+                type={MovieTypeEnum.FILM}
               />
             </div>
           ))

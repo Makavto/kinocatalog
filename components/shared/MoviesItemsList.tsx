@@ -7,6 +7,7 @@ import ArrowRight from '../Icons/ArrowRight';
 import styles from '../../styles/components/shared/MoviesItemsList.module.scss';
 import classNames from 'classnames';
 import React from 'react';
+import { MovieTypeEnum } from '../../types/enums/MovieType.enum';
 
 function MoviesItemsList() {
   const [swiper, setSwiper] = React.useState<any>({});
@@ -49,6 +50,7 @@ function MoviesItemsList() {
                 rating={film.rating}
                 posterUrl={film.posterUrlPreview}
                 year={film.year}
+                type={MovieTypeEnum.FILM}
               />
             </SwiperSlide>
           ))

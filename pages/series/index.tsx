@@ -27,6 +27,7 @@ function Series() {
                 year={film.year}
                 rating={film.rating}
                 posterUrl={film.posterUrlPreview}
+                type={MovieTypeEnum.TV_SERIES}
               />
             </div>
           ))

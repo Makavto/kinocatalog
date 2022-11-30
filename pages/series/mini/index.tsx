@@ -26,6 +26,7 @@ function MiniSeries() {
                 year={film.year}
                 rating={film.rating}
                 posterUrl={film.posterUrlPreview}
+                type={MovieTypeEnum.MINI_SERIES}
               />
             </div>
           ))

@@ -1,11 +1,9 @@
-import { seasonsMock } from "../../mocks/seasons.mock";
-import { seriesMock } from "../../mocks/series.mock";
 import Image from "next/image";
-import styles from "../../styles/pages/series/SeriesPage.module.scss";
+import { tvseriesMock } from "../../../mocks/tv-series.mock";
+import styles from "../../../styles/pages/series/tv/TvSeriesPage.module.scss";
 
-function SeriesPage() {
-  const series = seriesMock;
-  const season = seasonsMock;
+function TvSeriesPage() {
+  const series = tvseriesMock;
   let genres = '';
   let countries = '';
   series.genres.map((genre, i) => {
@@ -16,7 +14,7 @@ function SeriesPage() {
   })
   return (
     <div>
-      <div className={styles.cover}>
+      {/* <div className={styles.cover}>
         <Image className={styles.image} src={series.coverUrl} alt='Обложка' width={1920} height={1080} />
         <div className={styles.coverBlock}>
           <h1 className={styles.heading}>
@@ -26,41 +24,54 @@ function SeriesPage() {
             {series.nameOriginal} ({series.year})
           </h2>
         </div>
-      </div>
+      </div> */}
       <div className={styles.descrBlock}>
         <Image className={styles.poster} src={series.posterUrl} alt='Постер' width={667} height={1000} />
         <div className={styles.textBlock}>
           <h3 className={styles.heading}>
-            {series.slogan}
+            {series.nameRu ? series.nameRu : series.nameOriginal}
           </h3>
-          <div className="mb-3">
-            {series.description}
-          </div>
           <div className="d-flex mb-3">
             <div className={styles.rating}>
               Рейтинг <br /> IMdb<br />
               <span className={styles.score}>{series.ratingImdb}</span>
             </div>
-            <div className={styles.rating}>
-              Рейтинг <br /> Кинопоиска<br />
-              <span className={styles.score}>{series.ratingKinopoisk}</span>
-            </div>
-            <div className={styles.rating}>
-              Рейтинг <br /> Кинокритиков<br />
-              <span className={styles.score}>
-                {
-                  series.ratingFilmCritics 
-                  ? series.ratingFilmCritics 
-                  : series.ratingRfCritics
-                }
-              </span>
-            </div>
+            {
+              series.ratingKinopoisk
+                ? (
+                  <div className={styles.rating}>
+                    Рейтинг <br /> Кинопоиска<br />
+                    <span className={styles.score}>{series.ratingKinopoisk}</span>
+                  </div>
+                )
+                : <></>
+            }
+            {
+              series.ratingFilmCritics || series.ratingRfCritics
+                ? <div className={styles.rating}>
+                  Рейтинг <br /> Кинокритиков<br />
+                  <span className={styles.score}>
+                    {
+                      series.ratingFilmCritics
+                        ? series.ratingFilmCritics
+                        : series.ratingRfCritics
+                    }
+                  </span>
+                </div>
+                : <></>
+            }
           </div>
           <div className={styles.subHeading}>
-            Длительность
+            Год начала
           </div>
           <div className="mb-3">
-            {series.filmLength} мин
+            {series.startYear}
+          </div>
+          <div className={styles.subHeading}>
+            Год окончания
+          </div>
+          <div className="mb-3">
+            {series.endYear}
           </div>
           <div className={styles.subHeading}>
             Категории
@@ -80,4 +91,4 @@ function SeriesPage() {
   );
 }
 
-export default SeriesPage;
+export default TvSeriesPage;

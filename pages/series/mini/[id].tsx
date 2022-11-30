@@ -1,11 +1,11 @@
-import { seasonsMock } from "../../mocks/seasons.mock";
-import { seriesMock } from "../../mocks/series.mock";
 import Image from "next/image";
-import styles from "../../styles/pages/series/SeriesPage.module.scss";
+import { miniSeriesCoverMock } from "../../../mocks/mini-series-cover.mock";
+import { miniSeriesMock } from "../../../mocks/mini-series.mock";
+import styles from "../../../styles/pages/series/mini/MiniSeriesPage.module.scss";
 
-function SeriesPage() {
-  const series = seriesMock;
-  const season = seasonsMock;
+function MiniSeriesPage() {
+  // const series = miniSeriesMock;
+  const series = miniSeriesCoverMock;
   let genres = '';
   let countries = '';
   series.genres.map((genre, i) => {
@@ -16,23 +16,35 @@ function SeriesPage() {
   })
   return (
     <div>
-      <div className={styles.cover}>
-        <Image className={styles.image} src={series.coverUrl} alt='Обложка' width={1920} height={1080} />
-        <div className={styles.coverBlock}>
-          <h1 className={styles.heading}>
-            {series.nameRu}
-          </h1>
-          <h2 className={styles.subHeading}>
-            {series.nameOriginal} ({series.year})
-          </h2>
-        </div>
-      </div>
+      {
+        series.coverUrl
+          ? (
+            <div className={styles.cover}>
+              <Image className={styles.image} src={series.coverUrl} alt='Обложка' width={1920} height={1080} />
+              <div className={styles.coverBlock}>
+                <h1 className={styles.heading}>
+                  {series.nameRu}
+                </h1>
+                <h2 className={styles.subHeading}>
+                  {series.nameOriginal} ({series.year})
+                </h2>
+              </div>
+            </div>
+          )
+          : <></>
+      }
       <div className={styles.descrBlock}>
         <Image className={styles.poster} src={series.posterUrl} alt='Постер' width={667} height={1000} />
         <div className={styles.textBlock}>
-          <h3 className={styles.heading}>
-            {series.slogan}
-          </h3>
+          {
+            series.slogan
+              ? (
+                <h3 className={styles.heading}>
+                  {series.slogan}
+                </h3>
+              )
+              : <></>
+          }
           <div className="mb-3">
             {series.description}
           </div>
@@ -49,9 +61,9 @@ function SeriesPage() {
               Рейтинг <br /> Кинокритиков<br />
               <span className={styles.score}>
                 {
-                  series.ratingFilmCritics 
-                  ? series.ratingFilmCritics 
-                  : series.ratingRfCritics
+                  series.ratingFilmCritics
+                    ? series.ratingFilmCritics
+                    : series.ratingRfCritics
                 }
               </span>
             </div>
@@ -80,4 +92,4 @@ function SeriesPage() {
   );
 }
 
-export default SeriesPage;
+export default MiniSeriesPage;
