@@ -1,0 +1,99 @@
+@import "../../../global/variables.scss";
+
+.cover {
+  margin-bottom: 160px;
+  width: 100%;
+  height: auto;
+  position: relative;
+
+  .image {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    height: auto;
+    filter: grayscale(25%) contrast(110%);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: radial-gradient(transparent 65%, $page-background 100%);
+  }
+
+  &Block {
+    z-index: 1;
+    position: absolute;
+    top: calc(100% - 90px);
+    left: 3rem;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 6rem;
+    background: rgba($primary-color-dark-2, 20%);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    overflow: hidden;
+
+    .heading {
+      color: $primary-color;
+      font-size: 3rem;
+    }
+
+    .subHeading {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+.descrBlock {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+
+  .poster {
+    margin-right: 2rem;
+    width: 400px;
+    height: auto;
+    border-radius: 10px;
+  }
+
+  .textBlock {
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+
+    .heading {
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .rating {
+      margin-right: 1.5rem;
+      padding: .3rem .7rem;
+      width: fit-content;
+      text-align: center;
+      font-size: .8rem;
+      background: rgba(217, 217, 217, 0.1);
+      border: 1px solid $accent-color-2;
+      border-radius: 8px;
+
+      .score {
+        color: $accent-color;
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .subHeading {
+    color: $primary-color-dark;
+    font-size: .9rem;
+  }
+}

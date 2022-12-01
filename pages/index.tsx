@@ -9,11 +9,11 @@ export default function Index() {
         <input type="text" placeholder="Поиск по названию" />
         <button className='appButton'>Поиск</button>
       </div>
-      <h2 className='mt-4 mb-2'>Топ лучших</h2>
+      <h2 className='mt-4 mb-2 bold'>Топ лучших</h2>
       <MoviesItemsList />
-      <h2 className='mt-4 mb-2'>Кинопремьеры в России</h2>
+      <h2 className='mt-4 mb-2 bold'>Кинопремьеры в России</h2>
       <MoviesItemsList />
-      <h2 className='mt-4 mb-2'>Цифровые релизы</h2>
+      <h2 className='mt-4 mb-2 bold'>Цифровые релизы</h2>
       <MoviesItemsList />
     </div>
   )

@@ -1,0 +1,49 @@
+@import "../../../global/variables.scss";
+
+.descrBlock {
+  padding-left: 100px;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+
+  .poster {
+    margin-right: 4rem;
+    width: 200px;
+    height: auto;
+    border-radius: 10px;
+  }
+
+  .textBlock {
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+
+    .heading {
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .rating {
+      margin-right: 1.5rem;
+      padding: .3rem .7rem;
+      width: fit-content;
+      text-align: center;
+      font-size: .8rem;
+      background: rgba(217, 217, 217, 0.1);
+      border: 1px solid $accent-color-2;
+      border-radius: 8px;
+
+      .score {
+        color: $accent-color;
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .subHeading {
+    color: $primary-color-dark;
+    font-size: .9rem;
+  }
+}

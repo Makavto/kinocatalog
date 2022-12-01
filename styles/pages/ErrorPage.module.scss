@@ -1,0 +1,24 @@
+@import '../global/variables.scss';
+
+.container {
+  display: flex;
+  height: calc(100vh - 100px);
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  
+  .heading {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    font-weight: 800;
+    color: $accent-color;
+  }
+
+  .text {
+    margin-bottom: 2rem;
+    max-width: 1000px;
+    font-size: 1.5rem;
+  }
+}

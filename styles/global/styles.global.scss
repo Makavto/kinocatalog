@@ -48,8 +48,8 @@ button {
 }
 
 .appButton {
+  padding: 0 20px;
   height: 45px;
-  width: 100%;
   color: black;
   background: $accent-color;
   font-weight: 600;
@@ -64,4 +64,19 @@ button {
 
 .swiper-slide {
   height: auto;
+}
+
+.searchBlock {
+  position: relative;
+
+  button {
+    position: absolute;
+    right: 0;
+    max-width: 130px;
+  }
+}
+
+.movieItemWrapper {
+  margin-right: 2rem;
+  margin-bottom: 2rem;
 }

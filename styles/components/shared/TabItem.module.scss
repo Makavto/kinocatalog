@@ -1,0 +1,22 @@
+@import '/styles/global/variables.scss';
+
+.tabWrapper {
+  margin: 0 2rem;
+  padding: .5rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  background: $grey-background;
+  border-radius: 10px;
+  border: 1px solid $grey-background;
+  color: $primary-color;
+  font-weight: 400;
+  font-size: 1.3rem;
+
+  &.active {
+    color: $accent-color;
+    border: 1px solid $accent-color-2;
+  }
+}

@@ -14,7 +14,11 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <link rel="icon" href="/favicon.ico" />
+        <link type="image/x-icon" rel="shortcut icon" href="/favicon.ico"></link>
         <link rel="apple-touch-icon" href="/favicon.ico"></link>
+        <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2C2C2C" />
+        <meta name="color-scheme" content="#2C2C2C"></meta>
+        <title>Кинокаталог</title>
       </Head>
       <Layout>
         <Component {...pageProps}/>

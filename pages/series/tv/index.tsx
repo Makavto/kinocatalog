@@ -1,11 +1,10 @@
-import TabsList from '../../components/series/TabsList';
-import MovieItem from '../../components/shared/MovieItem';
-import MoviesItemsList from '../../components/shared/MoviesItemsList';
-import { topFilmsMock } from '../../mocks/topFilms.mock';
-import styles from '../../styles/pages/series/Index.module.scss';
-import { MovieTypeEnum } from '../../types/enums/MovieType.enum';
+import TabsList from "../../../components/series/TabsList";
+import MovieItem from "../../../components/shared/MovieItem";
+import MoviesItemsList from "../../../components/shared/MoviesItemsList";
+import { topFilmsMock } from "../../../mocks/topFilms.mock";
+import { MovieTypeEnum } from "../../../types/enums/MovieType.enum";
 
-function Series() {
+function TvSeries() {
   return (
     <div>
       <div className={'searchBlock'}>
@@ -13,11 +12,11 @@ function Series() {
           <button className='appButton'>Поиск</button>
       </div>
       <div className='mt-5'>
-        <TabsList active={MovieTypeEnum.TV_SERIES} />
+        <TabsList active={MovieTypeEnum.TV_SHOW} />
       </div>
-      <h2 className='mt-4 mb-2 bold'>Топ лучших сериалов</h2>
+      <h2 className='mt-4 mb-2 bold'>Топ лучших ТВ-Шоу</h2>
       <MoviesItemsList />
-      <h2 className='mt-4 mb-2 bold'>Все сериалы</h2>
+      <h2 className='mt-4 mb-2 bold'>Все ТВ-Шоу</h2>
       <div className="d-flex flex-wrap">
         {
           topFilmsMock.films.map(film => (
@@ -27,7 +26,7 @@ function Series() {
                 year={film.year}
                 rating={film.rating}
                 posterUrl={film.posterUrlPreview}
-                type={MovieTypeEnum.TV_SERIES}
+                type={MovieTypeEnum.TV_SHOW}
               />
             </div>
           ))
@@ -37,4 +36,4 @@ function Series() {
   );
 }
 
-export default Series;
+export default TvSeries;
