@@ -49,18 +49,36 @@ function SeriesPage() {
               Рейтинг <br /> Кинокритиков<br />
               <span className={styles.score}>
                 {
-                  series.ratingFilmCritics 
-                  ? series.ratingFilmCritics 
-                  : series.ratingRfCritics
+                  series.ratingFilmCritics
+                    ? series.ratingFilmCritics
+                    : series.ratingRfCritics
                 }
               </span>
             </div>
           </div>
+          {
+            series.filmLength
+              ? <>
+                <div className={styles.subHeading}>
+                  Длительность
+                </div>
+                <div className="mb-3">
+                  {series.filmLength} мин
+                </div>
+              </>
+              : <></>
+          }
           <div className={styles.subHeading}>
-            Длительность
+            Год начала
           </div>
           <div className="mb-3">
-            {series.filmLength} мин
+            {series.startYear}
+          </div>
+          <div className={styles.subHeading}>
+            Год окончания
+          </div>
+          <div className="mb-3">
+            {series.endYear}
           </div>
           <div className={styles.subHeading}>
             Категории
