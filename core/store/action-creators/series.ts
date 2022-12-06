@@ -1,20 +1,12 @@
 import { Dispatch } from "react"
-import { API_2_2 } from "../../constants"
-import { http } from "../../interceptor"
-import { MovieOrderEnum } from "../../types/enums/MovieOrder.enum"
-import { MovieTypeEnum } from "../../types/enums/MovieType.enum"
+import { seriesApi } from "../../api/series.api"
 import { Genre } from "../../types/interfaces/shared/Genre.interface"
 import { SeriesActions, SeriesActionTypes } from "../../types/reducers/series"
 
 export const getTopSeries = () => {
   return async (dispatch: Dispatch<SeriesActions>) => {
     try {
-      const response = await http.get(`${API_2_2}/films`, {
-        params: {
-          type: MovieTypeEnum.TV_SERIES,
-          order: MovieOrderEnum.NUM_VOTE
-        }
-      });
+      const response = await seriesApi().getTopSeries();
       dispatch({type: SeriesActionTypes.GET_TOP_SERIES, payload: {
         items: response.data.items,
         page: 1,
@@ -32,13 +24,7 @@ export const getTopSeries = () => {
 export const getTopGenreSeries = (genreId: number) => {
   return async (dispatch: Dispatch<SeriesActions>) => {
     try {
-      const response = await http.get(`${API_2_2}/films`, {
-        params: {
-          type: MovieTypeEnum.TV_SERIES,
-          order: MovieOrderEnum.NUM_VOTE,
-          genres: genreId
-        }
-      });
+      const response = await seriesApi().getTopGenreSeries(genreId);
       dispatch({type: SeriesActionTypes.GET_TOP_GENRE_SERIES, payload: {
         items: response.data.items,
         page: 1,
