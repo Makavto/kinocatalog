@@ -1,5 +1,5 @@
 import { API_2_1, API_2_2 } from "../constants"
-import { DateHelper } from "../date.helper"
+import { DateHelper } from "../helpers/date.helper"
 import { http } from "../interceptor"
 import { MovieOrderEnum } from "../types/enums/MovieOrder.enum"
 import { MovieTypeEnum } from "../types/enums/MovieType.enum"
