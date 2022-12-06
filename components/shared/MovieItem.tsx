@@ -5,7 +5,7 @@ import Great from "../Icons/Great";
 import Normal from "../Icons/Normal";
 import Awful from "../Icons/Awful";
 import Link from "next/link";
-import { MovieTypeEnum } from "../../types/enums/MovieType.enum";
+import { MovieTypeEnum } from "../../core/types/enums/MovieType.enum";
 
 interface IMovieItemProps {
   name: string,

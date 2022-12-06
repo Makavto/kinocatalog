@@ -2,8 +2,8 @@ import Image from "next/image";
 import { filmMock } from "../../mocks/film.mock";
 import styles from "../../styles/pages/films/FilmPage.module.scss";
 import { GetServerSideProps } from 'next';
-import { NextThunkDispatch, wrapper } from "../../store";
-import { getMovie } from "../../store/action-creators/movie";
+import { NextThunkDispatch, wrapper } from "../../core/store";
+import { getMovie } from "../../core/store/action-creators/movie";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 

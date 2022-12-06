@@ -1,5 +1,5 @@
-import { MovieTypeEnum } from "../../types/enums/MovieType.enum";
-import { MovieTypeRuEnum } from "../../types/enums/MovieTypeRu.enum";
+import { MovieTypeEnum } from "../../core/types/enums/MovieType.enum";
+import { MovieTypeRuEnum } from "../../core/types/enums/MovieTypeRu.enum";
 import styles from "../../styles/components/shared/TabItem.module.scss";
 import classNames from "classnames/bind";
 import Link from "next/link";

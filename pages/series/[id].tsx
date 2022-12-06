@@ -2,8 +2,8 @@ import { seasonsMock } from "../../mocks/seasons.mock";
 import { seriesMock } from "../../mocks/series.mock";
 import Image from "next/image";
 import styles from "../../styles/pages/series/SeriesPage.module.scss";
-import { NextThunkDispatch, wrapper } from "../../store";
-import { getMovie } from "../../store/action-creators/movie";
+import { NextThunkDispatch, wrapper } from "../../core/store";
+import { getMovie } from "../../core/store/action-creators/movie";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 function SeriesPage() {

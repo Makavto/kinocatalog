@@ -2,7 +2,7 @@ import TabsList from "../../../components/series/TabsList";
 import MovieItem from "../../../components/shared/MovieItem";
 import MoviesItemsList from "../../../components/shared/MoviesItemsList";
 import { topFilmsMock } from "../../../mocks/topFilms.mock";
-import { MovieTypeEnum } from "../../../types/enums/MovieType.enum";
+import { MovieTypeEnum } from "../../../core/types/enums/MovieType.enum";
 
 function TvSeries() {
   return (

@@ -8,7 +8,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import '../styles/global/styles.global.scss';
-import { wrapper } from "../store";
+import { wrapper } from "../core/store";
 import { Provider } from "react-redux";
 
 export default function App({ Component, ...rest }: AppProps) {

@@ -1,5 +1,5 @@
 import { ValueStateHelper } from '../ValueState.helper';
-import { MainActions, MainActionTypes, MainState } from './../../types/reducers/main';
+import { MainActions, MainActionTypes, MainState } from '../../types/reducers/main';
 
 export const mainInitialState: MainState = {
   premieres: {

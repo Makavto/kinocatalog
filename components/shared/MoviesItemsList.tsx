@@ -7,11 +7,11 @@ import ArrowRight from '../Icons/ArrowRight';
 import styles from '../../styles/components/shared/MoviesItemsList.module.scss';
 import classNames from 'classnames';
 import React from 'react';
-import { MovieTypeEnum } from '../../types/enums/MovieType.enum';
-import { FilmTopItem } from '../../types/interfaces/films/FilmTopItem.interface';
-import { MovieShort } from '../../types/interfaces/shared/MovieShort.interface';
-import { Premiere } from '../../types/interfaces/main/Premiere.interface';
-import { Release } from '../../types/interfaces/main/Release.interface';
+import { MovieTypeEnum } from '../../core/types/enums/MovieType.enum';
+import { FilmTopItem } from '../../core/types/interfaces/films/FilmTopItem.interface';
+import { MovieShort } from '../../core/types/interfaces/shared/MovieShort.interface';
+import { Premiere } from '../../core/types/interfaces/main/Premiere.interface';
+import { Release } from '../../core/types/interfaces/main/Release.interface';
 
 function isFilmTopItem(obj: any): obj is FilmTopItem {
   return obj.filmId !== undefined

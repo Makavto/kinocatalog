@@ -1,6 +1,6 @@
 import { Dispatch } from "react"
-import { API_2_2 } from "../../core/constants"
-import { http } from "../../core/interceptor"
+import { API_2_2 } from "../../constants"
+import { http } from "../../interceptor"
 import { MovieOrderEnum } from "../../types/enums/MovieOrder.enum"
 import { MovieTypeEnum } from "../../types/enums/MovieType.enum"
 import { Genre } from "../../types/interfaces/shared/Genre.interface"

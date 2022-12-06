@@ -4,10 +4,10 @@ import MoviesItemsList from '../../components/shared/MoviesItemsList';
 import { getRandomGenre } from '../../core/randomGenre.helper';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { topFilmsMock } from '../../mocks/topFilms.mock';
-import { NextThunkDispatch, wrapper } from '../../store';
-import { getTopGenreSeries, getTopSeries, setSeriesGenre } from '../../store/action-creators/series';
+import { NextThunkDispatch, wrapper } from '../../core/store';
+import { getTopGenreSeries, getTopSeries, setSeriesGenre } from '../../core/store/action-creators/series';
 import styles from '../../styles/pages/series/Index.module.scss';
-import { MovieTypeEnum } from '../../types/enums/MovieType.enum';
+import { MovieTypeEnum } from '../../core/types/enums/MovieType.enum';
 
 function Series() {
   const {genre, seriesTop, seriesTopGenre} = useTypedSelector(state => state.series)

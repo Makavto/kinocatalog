@@ -1,4 +1,4 @@
-import { MovieTypeEnum } from "../../types/enums/MovieType.enum";
+import { MovieTypeEnum } from "../../core/types/enums/MovieType.enum";
 import TabItem from "./TabItem";
 
 interface ITabsListProps {

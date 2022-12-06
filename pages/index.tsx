@@ -1,8 +1,8 @@
 import MoviesItemsList from '../components/shared/MoviesItemsList';
 import styles from '../styles/pages/Index.module.scss';
 import React from 'react';
-import { NextThunkDispatch, wrapper } from '../store';
-import { getPremiers, getReleases, getTopBest } from '../store/action-creators/main';
+import { NextThunkDispatch, wrapper } from '../core/store';
+import { getPremiers, getReleases, getTopBest } from '../core/store/action-creators/main';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 
 export default function Index() {
