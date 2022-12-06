@@ -1,11 +1,10 @@
-import { FilmTopItem } from "../interfaces/films/FilmTopItem.interface";
-import { MovieShort } from "../interfaces/shared/MovieShort.interface";
-import { Page } from "../interfaces/shared/Page.interface";
-import { ValueState } from "../interfaces/shared/ValueState.interface";
+import { MovieShort } from "../interfaces/MovieShort.interface";
+import { Page } from "../interfaces/Page.interface";
+import { ValueState } from "../interfaces/ValueState.interface";
 
 export interface FilmsState {
-  filmsPopular: ValueState<Page<FilmTopItem>>;
-  filmsAwait: ValueState<Page<FilmTopItem>>;
+  filmsPopular: ValueState<Page<MovieShort>>;
+  filmsAwait: ValueState<Page<MovieShort>>;
   filmsTop: ValueState<Page<MovieShort>>;
 }
 
@@ -20,7 +19,7 @@ export enum FilmsActionTypes {
 
 interface GetPopularFilmsAction {
   type: FilmsActionTypes.GET_POPULAR_FILMS,
-  payload: Page<FilmTopItem>
+  payload: Page<MovieShort>
 }
 
 interface GetPopularFilmsErrorAction {
@@ -30,7 +29,7 @@ interface GetPopularFilmsErrorAction {
 
 interface GetAwaitFilmsAction {
   type: FilmsActionTypes.GET_AWAIT_FILMS,
-  payload: Page<FilmTopItem>
+  payload: Page<MovieShort>
 }
 
 interface GetAwaitFilmsErrorAction {

@@ -1,7 +1,7 @@
-import { MovieTypeEnum } from "../../enums/MovieType.enum"
-import { ProductionStatusEnum } from "../../enums/ProductionStatus.enum"
+import { MovieTypeEnum } from "../enums/MovieType.enum"
+import { ProductionStatusEnum } from "../enums/ProductionStatus.enum"
 
-export interface Movie {
+export interface MovieDto {
   kinopoiskId: number,
   imdbId:	string | null,
   nameRu:	string | null,

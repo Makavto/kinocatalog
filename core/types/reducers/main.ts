@@ -1,13 +1,11 @@
-import { Premiere } from "../interfaces/main/Premiere.interface";
-import { Release } from "../interfaces/main/Release.interface";
-import { MovieShort } from "../interfaces/shared/MovieShort.interface";
-import { Page } from "../interfaces/shared/Page.interface";
-import { ValueState } from "../interfaces/shared/ValueState.interface";
+import { MovieShort } from "../interfaces/MovieShort.interface";
+import { Page } from "../interfaces/Page.interface";
+import { ValueState } from "../interfaces/ValueState.interface";
 
 export interface MainState {
   topBest: ValueState<Page<MovieShort>>;
-  premieres: ValueState<Premiere[]>;
-  releases: ValueState<Page<Release>>;
+  premieres: ValueState<MovieShort[]>;
+  releases: ValueState<Page<MovieShort>>;
 }
 
 export enum MainActionTypes {
@@ -31,7 +29,7 @@ interface getTopBestError {
 
 interface getReleases {
   type: MainActionTypes.GET_RELEASES,
-  payload: Page<Release>
+  payload: Page<MovieShort>
 }
 
 interface getReleasesError {
@@ -41,7 +39,7 @@ interface getReleasesError {
 
 interface getPremiers {
   type: MainActionTypes.GET_PREMIERES,
-  payload: Premiere[]
+  payload: MovieShort[]
 }
 
 interface getPremiersError {

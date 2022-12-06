@@ -1,4 +1,4 @@
-import { ValueState } from "../types/interfaces/shared/ValueState.interface"
+import { ValueState } from "../types/interfaces/ValueState.interface"
 
 export class ValueStateHelper {
   public static modelError<T>(error: string): ValueState<T> {

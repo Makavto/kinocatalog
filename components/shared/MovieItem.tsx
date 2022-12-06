@@ -6,17 +6,19 @@ import Normal from "../Icons/Normal";
 import Awful from "../Icons/Awful";
 import Link from "next/link";
 import { MovieTypeEnum } from "../../core/types/enums/MovieType.enum";
+import { formatRating } from "../../core/helpers/rating.helper";
 
 interface IMovieItemProps {
   name: string,
   posterUrl: string,
-  year: string | number,
-  rating?: string | number | null,
+  year: string,
+  rating?: string | null,
+  expectationsRating: string | null,
   type: MovieTypeEnum,
   id: number
 }
 
-function MovieItem({ name, posterUrl, year, rating, type, id }: IMovieItemProps) {
+function MovieItem({ name, posterUrl, year, rating, type, id, expectationsRating }: IMovieItemProps) {
   let navigationUrl: string;
   switch (type) {
     case MovieTypeEnum.FILM:
@@ -45,30 +47,30 @@ function MovieItem({ name, posterUrl, year, rating, type, id }: IMovieItemProps)
       <div className={styles.movieItemCardBody}>
         <div className={styles.movieItemCardRating}>
           {
-            rating
-            ? (
-              <>
-              { typeof rating !== 'number' && rating.includes('%')
-                ? <></>
-                : Number(rating) > 7.5
-                ? <Great />
-                : Number(rating) > 4.5
-                  ? <Normal />
-                  : <Awful />
-              }
-              <span className={styles.normal}>
-                {rating}
-              </span>
-              {
-                typeof rating !== 'number' && rating.includes('%')
-                ? <></>
-                : <span className={styles.small}>/10</span>
-              } 
-              </>
-            )
-            : <div className={styles.normal}>-</div>
+            rating !== null
+              ? (
+                <>
+                {
+                  Number(rating) > 7.5
+                    ? <Great />
+                    : Number(rating) > 4.5
+                      ? <Normal />
+                      : <Awful />
+                }
+                <span className={styles.normal}>
+                  {formatRating(rating)}
+                </span>
+                <span className={styles.small}>/10</span>
+                </>
+              )
+              : expectationsRating !== null
+                ? (
+                  <span className={styles.normal}>
+                    {expectationsRating}
+                  </span>
+                )
+                : <div className={styles.normal}>-</div>
           }
-          
         </div>
         <h5 className={styles.movieItemCardTitle}>{name}</h5>
         <span className={styles.movieItemCardYear}>({year})</span>

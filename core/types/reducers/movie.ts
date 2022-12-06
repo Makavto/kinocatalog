@@ -1,5 +1,5 @@
-import { Movie } from "../interfaces/shared/Movie.interface";
-import { ValueState } from "../interfaces/shared/ValueState.interface";
+import { Movie } from "../interfaces/Movie.interface";
+import { ValueState } from "../interfaces/ValueState.interface";
 
 export interface MovieState {
   movie: ValueState<Movie>

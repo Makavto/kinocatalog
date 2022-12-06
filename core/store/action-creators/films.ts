@@ -1,5 +1,7 @@
 import { Dispatch } from "react";
 import { filmsApi } from "../../api/films.api";
+import { FilmTopMapper } from "../../mappers/FilmTop.mapper";
+import { MovieListMapper } from "../../mappers/MovieList.mapper";
 import { FilmsAction, FilmsActionTypes } from "../../types/reducers/films";
 
 export const getFilmsPopular = () => {
@@ -7,7 +9,7 @@ export const getFilmsPopular = () => {
     try {
       const res = await filmsApi().getFilmsPopular();
       return dispatch({type: FilmsActionTypes.GET_POPULAR_FILMS, payload: {
-        items: res.data.films,
+        items: FilmTopMapper(res.data),
         page: 1,
         pagesCount: res.data.pagesCount
       }})
@@ -25,7 +27,7 @@ export const getFilmsAwait = () => {
     try {
       const res = await filmsApi().getFilmsAwait();
       return dispatch({type: FilmsActionTypes.GET_AWAIT_FILMS, payload: {
-        items: res.data.films,
+        items: FilmTopMapper(res.data),
         page: 1,
         pagesCount: res.data.pagesCount
       }})
@@ -43,7 +45,7 @@ export const getFilmsTop = () => {
     try {
       const response = await filmsApi().getFilmsTop();
       dispatch({type: FilmsActionTypes.GET_TOP_FILMS, payload: {
-        items: response.data.items,
+        items: MovieListMapper(response.data),
         page: 1,
         pagesCount: response.data.totalPages
       }})

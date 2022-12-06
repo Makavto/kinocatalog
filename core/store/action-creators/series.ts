@@ -1,6 +1,7 @@
 import { Dispatch } from "react"
 import { seriesApi } from "../../api/series.api"
-import { Genre } from "../../types/interfaces/shared/Genre.interface"
+import { MovieListMapper } from "../../mappers/MovieList.mapper"
+import { Genre } from "../../types/interfaces/Genre.interface"
 import { SeriesActions, SeriesActionTypes } from "../../types/reducers/series"
 
 export const getTopSeries = () => {
@@ -8,7 +9,7 @@ export const getTopSeries = () => {
     try {
       const response = await seriesApi().getTopSeries();
       dispatch({type: SeriesActionTypes.GET_TOP_SERIES, payload: {
-        items: response.data.items,
+        items: MovieListMapper(response.data),
         page: 1,
         pagesCount: response.data.totalPages
       }})
@@ -26,7 +27,7 @@ export const getTopGenreSeries = (genreId: number) => {
     try {
       const response = await seriesApi().getTopGenreSeries(genreId);
       dispatch({type: SeriesActionTypes.GET_TOP_GENRE_SERIES, payload: {
-        items: response.data.items,
+        items: MovieListMapper(response.data),
         page: 1,
         pagesCount: response.data.totalPages
       }})

@@ -1,7 +1,7 @@
-import { Genre } from "../interfaces/shared/Genre.interface";
-import { MovieShort } from "../interfaces/shared/MovieShort.interface";
-import { Page } from "../interfaces/shared/Page.interface";
-import { ValueState } from "../interfaces/shared/ValueState.interface";
+import { Genre } from "../interfaces/Genre.interface";
+import { MovieShort } from "../interfaces/MovieShort.interface";
+import { Page } from "../interfaces/Page.interface";
+import { ValueState } from "../interfaces/ValueState.interface";
 
 export interface SeriesState {
   seriesTop: ValueState<Page<MovieShort>>;
