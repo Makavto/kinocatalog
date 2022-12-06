@@ -8,8 +8,29 @@ import styles from '../../styles/components/shared/MoviesItemsList.module.scss';
 import classNames from 'classnames';
 import React from 'react';
 import { MovieTypeEnum } from '../../types/enums/MovieType.enum';
+import { FilmTopItem } from '../../types/interfaces/films/FilmTopItem.interface';
+import { MovieShort } from '../../types/interfaces/shared/MovieShort.interface';
+import { Premiere } from '../../types/interfaces/main/Premiere.interface';
+import { Release } from '../../types/interfaces/main/Release.interface';
 
-function MoviesItemsList() {
+function isFilmTopItem(obj: any): obj is FilmTopItem {
+  return obj.filmId !== undefined
+}
+
+function isPremiere(obj: any): obj is Premiere {
+  return obj.nameEn !== undefined
+}
+
+function isRelease(obj: any): obj is Release {
+  return obj.expectationsRating !== undefined
+}
+
+interface IMoviesItemsList {
+  moviesList: FilmTopItem[] | MovieShort[] | Premiere[] | Release[],
+  type?: MovieTypeEnum
+}
+
+function MoviesItemsList({ moviesList, type }: IMoviesItemsList) {
   const [swiper, setSwiper] = React.useState<any>({});
 
   const handleRight = () => {
@@ -18,6 +39,12 @@ function MoviesItemsList() {
 
   const handleLeft = () => {
     swiper.slidePrev();
+  }
+
+  if (!moviesList) {
+    return (
+      <></>
+    )
   }
 
   return (
@@ -43,17 +70,33 @@ function MoviesItemsList() {
         }}
       >
         {
-          topFilmsMock.films.slice(0, 10).map(film => (
-            <SwiperSlide key={film.filmId}>
-              <Item
-                name={film.nameRu}
-                rating={film.rating}
-                posterUrl={film.posterUrlPreview}
-                year={film.year}
-                type={MovieTypeEnum.FILM}
-              />
-            </SwiperSlide>
-          ))
+          moviesList.slice(0, 20).map(film => {
+            const id = isFilmTopItem(film) || isRelease(film)
+              ? film.filmId 
+              : film.kinopoiskId;
+            const rating = isFilmTopItem(film) 
+            ? film.rating
+            : isRelease(film)
+            ? film.expectationsRating
+            : film.ratingKinopoisk;
+            const name = film.nameRu 
+              ? film.nameRu 
+              : isFilmTopItem(film) || isPremiere(film) || isRelease(film)
+              ? film.nameEn 
+              : film.nameOriginal
+            return (
+              <SwiperSlide key={id}>
+                <Item
+                  name={name!}
+                  rating={rating}
+                  posterUrl={film.posterUrlPreview!}
+                  year={film.year!}
+                  type={type ? type : MovieTypeEnum.FILM}
+                  id={id}
+                />
+              </SwiperSlide>
+            )
+          })
         }
       </Swiper>
       <button onClick={handleRight} className={classNames(styles.arrow, styles.right)}>

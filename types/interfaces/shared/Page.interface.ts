@@ -1,5 +1,5 @@
 export interface Page<T> {
-  items: T,
+  items: T[],
   page: number;
-  pages: number
+  pagesCount: number
 }

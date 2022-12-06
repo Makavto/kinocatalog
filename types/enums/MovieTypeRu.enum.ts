@@ -3,5 +3,6 @@ export enum MovieTypeRuEnum {
   FILM = 'Фильмы',
   TV_SERIES = 'Сериалы',
   MINI_SERIES = 'Мини-сериалы',
-  ALL = 'Все'
+  ALL = 'Все',
+  VIDEO = 'Видео'
 }
