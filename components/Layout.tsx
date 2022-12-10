@@ -25,6 +25,10 @@ export default function Layout({ children }: ILayoutProps) {
       </div>
       <div id="scrollbar" className={styles.pageWrapper}>
         <main>
+        <div className={'searchBlock'}>
+          <input type="text" placeholder="Поиск по названию" />
+          <button className='appButton'>Поиск</button>
+        </div>
           {children}
         </main>
       </div>

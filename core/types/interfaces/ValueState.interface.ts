@@ -1,5 +1,4 @@
 export interface ValueState<T> {
-  value: T;
-  loading: boolean;
+  value: T | null;
   error: string | null
 }

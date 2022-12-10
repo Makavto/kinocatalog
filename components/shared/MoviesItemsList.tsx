@@ -1,5 +1,5 @@
-import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Scrollbar } from 'swiper';
 import { topFilmsMock } from '../../mocks/topFilms.mock';
 import Item from './MovieItem';
 import ArrowLeft from './../Icons/ArrowLeft';
@@ -7,9 +7,15 @@ import ArrowRight from '../Icons/ArrowRight';
 import styles from '../../styles/components/shared/MoviesItemsList.module.scss';
 import classNames from 'classnames';
 import React from 'react';
-import { MovieTypeEnum } from '../../types/enums/MovieType.enum';
+import { MovieTypeEnum } from '../../core/types/enums/MovieType.enum';
+import { MovieShort } from '../../core/types/interfaces/MovieShort.interface';
 
-function MoviesItemsList() {
+interface IMoviesItemsList {
+  moviesList: MovieShort[],
+  type?: MovieTypeEnum
+}
+
+function MoviesItemsList({ moviesList, type }: IMoviesItemsList) {
   const [swiper, setSwiper] = React.useState<any>({});
 
   const handleRight = () => {
@@ -18,6 +24,12 @@ function MoviesItemsList() {
 
   const handleLeft = () => {
     swiper.slidePrev();
+  }
+
+  if (!moviesList) {
+    return (
+      <></>
+    )
   }
 
   return (
@@ -43,17 +55,22 @@ function MoviesItemsList() {
         }}
       >
         {
-          topFilmsMock.films.slice(0, 10).map(film => (
-            <SwiperSlide key={film.filmId}>
-              <Item
-                name={film.nameRu}
-                rating={film.rating}
-                posterUrl={film.posterUrlPreview}
-                year={film.year}
-                type={MovieTypeEnum.FILM}
-              />
-            </SwiperSlide>
-          ))
+          moviesList.slice(0, 20).map(film => {
+            const name = film.nameRu ? film.nameRu : film.nameOrig;
+            return (
+              <SwiperSlide key={film.filmId}>
+                <Item
+                  name={name!}
+                  rating={film.rating}
+                  expectationsRating={film.expectationsRating}
+                  posterUrl={film.posterUrlPreview!}
+                  year={film.year!}
+                  type={type ? type : MovieTypeEnum.FILM}
+                  id={film.filmId}
+                />
+              </SwiperSlide>
+            )
+          })
         }
       </Swiper>
       <button onClick={handleRight} className={classNames(styles.arrow, styles.right)}>

@@ -1,9 +1,20 @@
 import Image from "next/image";
 import { filmMock } from "../../mocks/film.mock";
 import styles from "../../styles/pages/films/FilmPage.module.scss";
+import { GetServerSideProps } from 'next';
+import { NextThunkDispatch, wrapper } from "../../core/store";
+import { getMovie } from "../../core/store/action-creators/movie";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+
 
 function FilmPage() {
-  const film = filmMock;
+  const { movie } = useTypedSelector(state => state.movie)
+  if (!movie.value) {
+    return (
+      <div>{movie.error}</div>
+    )
+  }
+  const film = movie.value;
   let genres = '';
   let countries = '';
   film.genres.map((genre, i) => {
@@ -14,17 +25,32 @@ function FilmPage() {
   })
   return (
     <div>
-      <div className={styles.cover}>
-        <Image className={styles.image} src={film.coverUrl} alt='Обложка' width={1920} height={1080} />
-        <div className={styles.coverBlock}>
-          <h1 className={styles.heading}>
-            {film.nameRu}
-          </h1>
-          <h2 className={styles.subHeading}>
-            {film.nameOriginal} ({film.year})
-          </h2>
-        </div>
-      </div>
+      {
+        film.coverUrl
+          ? (
+            <div className={styles.cover}>
+              <Image className={styles.image} src={film.coverUrl} alt='Обложка' width={1920} height={1080} />
+              <div className={styles.coverBlock}>
+                <h1 className={styles.heading}>
+                  {film.nameRu}
+                </h1>
+                <h2 className={styles.subHeading}>
+                  {film.nameOriginal} ({film.year})
+                </h2>
+              </div>
+            </div>
+          )
+          : (
+            <div>
+              <h1 className="bold">
+                {film.nameRu}
+              </h1>
+              <h2 className="mb-4">
+                {film.nameOriginal} ({film.year})
+              </h2>
+            </div>
+            )
+      }
       <div className={styles.descrBlock}>
         <Image className={styles.poster} src={film.posterUrl} alt='Постер' width={667} height={1000} />
         <div className={styles.textBlock}>
@@ -73,3 +99,9 @@ function FilmPage() {
 }
 
 export default FilmPage;
+
+export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ params }) => {
+  const dispatch = store.dispatch as NextThunkDispatch;
+  await dispatch(getMovie(params!.id!))
+  return { props: {} }
+})

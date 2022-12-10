@@ -2,12 +2,22 @@ import { seasonsMock } from "../../mocks/seasons.mock";
 import { seriesMock } from "../../mocks/series.mock";
 import Image from "next/image";
 import styles from "../../styles/pages/series/SeriesPage.module.scss";
+import { NextThunkDispatch, wrapper } from "../../core/store";
+import { getMovie } from "../../core/store/action-creators/movie";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 function SeriesPage() {
-  const series = seriesMock;
+  // const series = seriesMock;
   const season = seasonsMock;
+  const { movie } = useTypedSelector(state => state.movie)
+  if (!movie.value) {
+    return (
+      <div>{movie.error}</div>
+      )
+  }
   let genres = '';
   let countries = '';
+  const series = movie.value;
   series.genres.map((genre, i) => {
     i == 0 ? genres = genre.genre : genres = genres.concat(`, ${genre.genre}`)
   })
@@ -16,17 +26,32 @@ function SeriesPage() {
   })
   return (
     <div>
-      <div className={styles.cover}>
-        <Image className={styles.image} src={series.coverUrl} alt='Обложка' width={1920} height={1080} />
-        <div className={styles.coverBlock}>
-          <h1 className={styles.heading}>
-            {series.nameRu}
-          </h1>
-          <h2 className={styles.subHeading}>
-            {series.nameOriginal} ({series.year})
-          </h2>
-        </div>
-      </div>
+      {
+        series.coverUrl
+          ? (
+            <div className={styles.cover}>
+              <Image className={styles.image} src={series.coverUrl} alt='Обложка' width={1920} height={1080} />
+              <div className={styles.coverBlock}>
+                <h1 className={styles.heading}>
+                  {series.nameRu}
+                </h1>
+                <h2 className={styles.subHeading}>
+                  {series.nameOriginal} ({series.startYear} - {series.endYear})
+                </h2>
+              </div>
+            </div>
+          )
+          : (
+            <div>
+              <h1 className="bold">
+                {series.nameRu}
+              </h1>
+              <h2 className="mb-4">
+                {series.nameOriginal} ({series.startYear} - {series.endYear})
+              </h2>
+            </div>
+          )
+      }
       <div className={styles.descrBlock}>
         <Image className={styles.poster} src={series.posterUrl} alt='Постер' width={667} height={1000} />
         <div className={styles.textBlock}>
@@ -99,3 +124,9 @@ function SeriesPage() {
 }
 
 export default SeriesPage;
+
+export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ params }) => {
+  const dispatch = store.dispatch as NextThunkDispatch;
+  await dispatch(getMovie(params!.id!))
+  return { props: {} }
+})

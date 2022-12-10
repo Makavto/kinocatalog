@@ -3,5 +3,6 @@ export enum MovieTypeEnum {
   FILM = 'FILM',
   TV_SERIES = 'TV_SERIES',
   MINI_SERIES = 'MINI_SERIES',
-  ALL = 'ALL'
+  ALL = 'ALL',
+  VIDEO = 'VIDEO'
 }
