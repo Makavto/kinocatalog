@@ -9,10 +9,6 @@ export default function Index() {
   const {premieres, releases, topBest} = useTypedSelector(state => state.main)
   return (
     <div>
-      <div className={styles.searchBlock}>
-        <input type="text" placeholder="Поиск по названию" />
-        <button className='appButton'>Поиск</button>
-      </div>
       <h2 className='mt-4 mb-2 bold'>Топ лучших</h2>
       {
         topBest.value

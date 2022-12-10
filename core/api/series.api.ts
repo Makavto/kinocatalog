@@ -25,6 +25,47 @@ export const seriesApi = () => {
             genres: genreId
           }
         });
+      },
+
+    getTopMiniSeries:
+      async () => {
+        return await http.get<MovieListDto>(`${API_2_2}/films`, {
+          params: {
+            type: MovieTypeEnum.MINI_SERIES,
+            order: MovieOrderEnum.NUM_VOTE
+          }
+        });
+      },
+
+    getTopGenreMiniSeries:
+      async (genreId: number) => {
+        return await http.get<MovieListDto>(`${API_2_2}/films`, {
+          params: {
+            type: MovieTypeEnum.MINI_SERIES,
+            order: MovieOrderEnum.NUM_VOTE,
+            genres: genreId
+          }
+        });
+      },
+
+    getTopTvSeries:
+      async () => {
+        return await http.get<MovieListDto>(`${API_2_2}/films`, {
+          params: {
+            type: MovieTypeEnum.TV_SHOW,
+            order: MovieOrderEnum.RATING
+          }
+        });
+      },
+
+    getPopularTvSeries:
+      async () => {
+        return await http.get<MovieListDto>(`${API_2_2}/films`, {
+          params: {
+            type: MovieTypeEnum.TV_SHOW,
+            order: MovieOrderEnum.NUM_VOTE,
+          }
+        });
       }
   }
 }

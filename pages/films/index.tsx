@@ -12,10 +12,6 @@ function Films() {
   const {filmsAwait, filmsPopular, filmsTop} = useTypedSelector(state => state.films);
   return (
     <div>
-      <div className={'searchBlock'}>
-        <input type="text" placeholder="Поиск по названию" />
-        <button className='appButton'>Поиск</button>
-      </div>
       <h2 className='mt-4 mb-2 bold'>Топ популярных фильмов</h2>
       {
         filmsPopular.value

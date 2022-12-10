@@ -10,6 +10,8 @@ import 'swiper/css/scrollbar';
 import '../styles/global/styles.global.scss';
 import { wrapper } from "../core/store";
 import { Provider } from "react-redux";
+import { setSeriesGenre } from "../core/store/action-creators/series";
+import { getRandomGenre } from "../core/helpers/randomGenre.helper";
 
 export default function App({ Component, ...rest }: AppProps) {
   const {store, props} = wrapper.useWrappedStore(rest);
@@ -29,3 +31,9 @@ export default function App({ Component, ...rest }: AppProps) {
     </Provider>
   )
 }
+
+export const getStaticProps = wrapper.getStaticProps(store => () => {
+  const genre = getRandomGenre();
+  store.dispatch(setSeriesGenre(genre));
+  return {props: {}, revalidate: 30}
+})

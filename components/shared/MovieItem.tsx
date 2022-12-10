@@ -47,7 +47,7 @@ function MovieItem({ name, posterUrl, year, rating, type, id, expectationsRating
       <div className={styles.movieItemCardBody}>
         <div className={styles.movieItemCardRating}>
           {
-            rating !== null
+            rating !== null && rating !== undefined && rating !== 'null'
               ? (
                 <>
                 {

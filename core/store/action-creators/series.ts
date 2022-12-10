@@ -40,6 +40,79 @@ export const getTopGenreSeries = (genreId: number) => {
   }
 }
 
+export const getTopMiniSeries = () => {
+  return async (dispatch: Dispatch<SeriesActions>) => {
+    try {
+      const response = await seriesApi().getTopMiniSeries();
+      dispatch({type: SeriesActionTypes.GET_TOP_MINI_SERIES, payload: {
+        items: MovieListMapper(response.data),
+        page: 1,
+        pagesCount: response.data.totalPages
+      }})
+    } catch (error) {
+      dispatch({
+        type: SeriesActionTypes.GET_TOP_MINI_SERIES_ERROR,
+        payload: 'Произошла ошибка при загрузке лучших мини сериалов'
+      })
+    }
+  }
+}
+
+export const getTopGenreMiniSeries = (genreId: number) => {
+  return async (dispatch: Dispatch<SeriesActions>) => {
+    try {
+      const response = await seriesApi().getTopGenreMiniSeries(genreId);
+      dispatch({type: SeriesActionTypes.GET_TOP_GENRE_MINI_SERIES, payload: {
+        items: MovieListMapper(response.data),
+        page: 1,
+        pagesCount: response.data.totalPages
+      }})
+    } catch (error) {
+      dispatch({
+        type: SeriesActionTypes.GET_TOP_GENRE_MINI_SERIES_ERROR,
+        payload: 'Произошла ошибка при загрузке лучших мини сериалов'
+      })
+    }
+  }
+}
+
+// 
+export const getTopTvSeries = () => {
+  return async (dispatch: Dispatch<SeriesActions>) => {
+    try {
+      const response = await seriesApi().getTopTvSeries();
+      dispatch({type: SeriesActionTypes.GET_TOP_TV_SERIES, payload: {
+        items: MovieListMapper(response.data),
+        page: 1,
+        pagesCount: response.data.totalPages
+      }})
+    } catch (error) {
+      dispatch({
+        type: SeriesActionTypes.GET_TOP_TV_SERIES_ERROR,
+        payload: 'Произошла ошибка при загрузке лучших тв-шоу'
+      })
+    }
+  }
+}
+
+export const getPopularTvSeries = () => {
+  return async (dispatch: Dispatch<SeriesActions>) => {
+    try {
+      const response = await seriesApi().getPopularTvSeries();
+      dispatch({type: SeriesActionTypes.GET_POPULAR_TV_SERIES, payload: {
+        items: MovieListMapper(response.data),
+        page: 1,
+        pagesCount: response.data.totalPages
+      }})
+    } catch (error) {
+      dispatch({
+        type: SeriesActionTypes.GET_POPULAR_TV_SERIES_ERROR,
+        payload: 'Произошла ошибка при загрузке популярных тв-шоу'
+      })
+    }
+  }
+}
+
 export const setSeriesGenre = (genre: Genre): SeriesActions => {
   return {type: SeriesActionTypes.SET_GENRE, payload: genre}
 }
