@@ -36,5 +36,5 @@ export const getStaticProps = wrapper.getStaticProps((store) => async () => {
   const dispatch = store.dispatch as NextThunkDispatch;
   await dispatch(getTopTvSeries());
   await dispatch(getPopularTvSeries());
-  return {props: {}, revalidate: 30}
+  return {props: {}}
 })

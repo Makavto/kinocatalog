@@ -6,6 +6,7 @@ import { MovieTypeEnum } from "../../../core/types/enums/MovieType.enum";
 import { wrapper, NextThunkDispatch } from "../../../core/store";
 import { getTopMiniSeries, getTopGenreMiniSeries } from "../../../core/store/action-creators/series";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import { getRandomGenre } from "../../../core/helpers/randomGenre.helper";
 
 function MiniSeries() {
   const {genre, miniSeriesTop, miniSeriesTopGenre} = useTypedSelector(state => state.series)
@@ -34,8 +35,8 @@ export default MiniSeries;
 
 export const getStaticProps = wrapper.getStaticProps((store) => async () => {
   const dispatch = store.dispatch as NextThunkDispatch;
-  const genre = store.getState().series.genre;
+  const genre = getRandomGenre();
   await dispatch(getTopMiniSeries());
-  await dispatch(getTopGenreMiniSeries(genre!.id));
+  await dispatch(getTopGenreMiniSeries(genre.id));
   return {props: {}, revalidate: 30}
 })

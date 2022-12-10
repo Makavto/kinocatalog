@@ -31,9 +31,3 @@ export default function App({ Component, ...rest }: AppProps) {
     </Provider>
   )
 }
-
-export const getStaticProps = wrapper.getStaticProps(store => () => {
-  const genre = getRandomGenre();
-  store.dispatch(setSeriesGenre(genre));
-  return {props: {}, revalidate: 30}
-})

@@ -5,7 +5,7 @@ import { getRandomGenre } from '../../core/helpers/randomGenre.helper';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { topFilmsMock } from '../../mocks/topFilms.mock';
 import { NextThunkDispatch, wrapper } from '../../core/store';
-import { getTopGenreSeries, getTopSeries, setSeriesGenre } from '../../core/store/action-creators/series';
+import { getTopGenreSeries, getTopSeries } from '../../core/store/action-creators/series';
 import styles from '../../styles/pages/series/Index.module.scss';
 import { MovieTypeEnum } from '../../core/types/enums/MovieType.enum';
 
@@ -36,9 +36,7 @@ export default Series;
 
 export const getStaticProps = wrapper.getStaticProps((store) => async () => {
   const dispatch = store.dispatch as NextThunkDispatch;
-  const genre = store.getState().series.genre;
-  // const genre = getRandomGenre();
-  // store.dispatch(setSeriesGenre(genre));
+  const genre = getRandomGenre();
   await dispatch(getTopSeries());
   await dispatch(getTopGenreSeries(genre!.id));
   return {props: {}, revalidate: 30}
