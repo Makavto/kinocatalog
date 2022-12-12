@@ -1,3 +1,5 @@
+import { MovieTypeEnum } from "../enums/MovieType.enum";
+
 export interface MovieShort {
   filmId: number,
   nameRu:	string | null,
@@ -5,5 +7,6 @@ export interface MovieShort {
   year:	string | null,
   rating:	string | null,
   expectationsRating:	string | null,
-  posterUrlPreview:	string
+  posterUrlPreview:	string,
+  type: MovieTypeEnum | null
 }

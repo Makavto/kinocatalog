@@ -9,7 +9,7 @@ export default function Index() {
   const {premieres, releases, topBest} = useTypedSelector(state => state.main)
   return (
     <div>
-      <h2 className='mt-4 mb-2 bold'>Топ лучших</h2>
+      <h2 className='mb-2 bold'>Топ лучших</h2>
       {
         topBest.value
         ? <MoviesItemsList moviesList={topBest.value.items}/>

@@ -12,10 +12,9 @@ import { MovieShort } from '../../core/types/interfaces/MovieShort.interface';
 
 interface IMoviesItemsList {
   moviesList: MovieShort[],
-  type?: MovieTypeEnum
 }
 
-function MoviesItemsList({ moviesList, type }: IMoviesItemsList) {
+function MoviesItemsList({ moviesList }: IMoviesItemsList) {
   const [swiper, setSwiper] = React.useState<any>({});
 
   const handleRight = () => {
@@ -65,7 +64,7 @@ function MoviesItemsList({ moviesList, type }: IMoviesItemsList) {
                   expectationsRating={film.expectationsRating}
                   posterUrl={film.posterUrlPreview!}
                   year={film.year!}
-                  type={type ? type : MovieTypeEnum.FILM}
+                  type={film.type ? film.type : MovieTypeEnum.FILM}
                   id={film.filmId}
                 />
               </SwiperSlide>

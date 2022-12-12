@@ -69,7 +69,6 @@ interface GetTopGenreMiniSeriesError {
   payload: string
 }
 
-//
 interface GetTopTvSeries {
   type: SeriesActionTypes.GET_TOP_TV_SERIES,
   payload: Page<MovieShort>

@@ -11,19 +11,17 @@ function TvSeries() {
   const {tvSeriesTop, tvSeriesPopular} = useTypedSelector(state => state.series)
   return (
     <div>
-      <div className='mt-5'>
-        <TabsList active={MovieTypeEnum.TV_SHOW} />
-      </div>
+      <TabsList active={MovieTypeEnum.TV_SHOW} />
       <h2 className='mt-4 mb-2 bold'>Топ лучших ТВ-Шоу</h2>
       {
         tvSeriesTop.value
-        ? <MoviesItemsList moviesList={tvSeriesTop.value.items} type={MovieTypeEnum.TV_SERIES}/>
+        ? <MoviesItemsList moviesList={tvSeriesTop.value.items}/>
         : <></>
       }
       <h2 className='mt-4 mb-2 bold'>Топ популярных ТВ-Шоу</h2>
       {
         tvSeriesPopular.value
-        ? <MoviesItemsList moviesList={tvSeriesPopular.value.items} type={MovieTypeEnum.TV_SERIES}/>
+        ? <MoviesItemsList moviesList={tvSeriesPopular.value.items}/>
         : <></>
       }
     </div>
