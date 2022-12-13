@@ -1,4 +1,5 @@
 import { ReleaseDto } from "../types/dto/Release.dto";
+import { MovieTypeEnum } from "../types/enums/MovieType.enum";
 import { MovieShort } from "../types/interfaces/MovieShort.interface";
 
 export const ReleaseMapper = (dto: ReleaseDto): MovieShort[] => {
@@ -13,7 +14,8 @@ export const ReleaseMapper = (dto: ReleaseDto): MovieShort[] => {
         nameRu: item.nameRu,
         posterUrlPreview: item.posterUrlPreview,
         rating: rating,
-        year: String(item.year)
+        year: String(item.year),
+        type: MovieTypeEnum.FILM
       }
     }
   )

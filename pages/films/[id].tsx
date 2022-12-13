@@ -1,13 +1,13 @@
 import Image from "next/image";
-import { filmMock } from "../../mocks/film.mock";
 import styles from "../../styles/pages/films/FilmPage.module.scss";
-import { GetServerSideProps } from 'next';
+import { InferGetServerSidePropsType } from 'next';
 import { NextThunkDispatch, wrapper } from "../../core/store";
 import { getMovie } from "../../core/store/action-creators/movie";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { imagePlaceholderHelper } from "../../core/helpers/imagePlaceholder.helper";
 
 
-function FilmPage() {
+function FilmPage({ imageProps }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { movie } = useTypedSelector(state => state.movie)
   if (!movie.value) {
     return (
@@ -26,10 +26,15 @@ function FilmPage() {
   return (
     <div>
       {
-        film.coverUrl
+        film.coverUrl && imageProps
           ? (
             <div className={styles.cover}>
-              <Image className={styles.image} src={film.coverUrl} alt='Обложка' width={1920} height={1080} />
+              <Image
+                className={styles.image}
+                alt='Обложка'
+                {...imageProps}
+                placeholder='blur'
+                />
               <div className={styles.coverBlock}>
                 <h1 className={styles.heading}>
                   {film.nameRu}
@@ -49,7 +54,7 @@ function FilmPage() {
                 {film.nameOriginal} ({film.year})
               </h2>
             </div>
-            )
+          )
       }
       <div className={styles.descrBlock}>
         <Image className={styles.poster} src={film.posterUrl} alt='Постер' width={667} height={1000} />
@@ -102,6 +107,13 @@ export default FilmPage;
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ params }) => {
   const dispatch = store.dispatch as NextThunkDispatch;
-  await dispatch(getMovie(params!.id!))
-  return { props: {} }
+  const image = await dispatch(getMovie(params!.id!)).then(async () => {
+    const { movie } = store.getState().movie;
+    return imagePlaceholderHelper().getPlaceholder(movie.value?.coverUrl);
+  }).then(value => value);
+  return {
+    props: {
+      imageProps: image
+    }
+  }
 })

@@ -13,7 +13,8 @@ export const MovieListMapper = (dto: MovieListDto): MovieShort[] => {
         nameRu: item.nameRu,
         posterUrlPreview: item.posterUrlPreview,
         rating: rating,
-        year: String(item.year)
+        year: String(item.year),
+        type: item.type
       }
     }
   )

@@ -3,6 +3,9 @@ import Menu from "./Menu";
 import styles from "../styles/components/Layout.module.scss";
 import Scrollbar from 'smooth-scrollbar';
 import { useRouter } from "next/router";
+import { useTypedSelector } from "../hooks/useTypedSelector";
+import { useActions } from "../hooks/useActions";
+import { ScrollStatus } from "smooth-scrollbar/interfaces";
 
 interface ILayoutProps {
   children: React.ReactNode
@@ -10,14 +13,25 @@ interface ILayoutProps {
 
 export default function Layout({ children }: ILayoutProps) {
   const router = useRouter();
+
   React.useEffect(() => {
-    const scroll = Scrollbar.init(document.getElementById('scrollbar')!);
+    let scroll = Scrollbar.init(document.getElementById('scrollbar')!);
     scroll.track.xAxis.element.remove();
     return () => {
       if (scroll)
         scroll.destroy();
     }
-  }, [router.pathname])
+  }, [router.pathname]);
+
+  // React.useEffect(() => {
+  //   scroll?.addListener(listener)
+  //   return () => {
+  //     console.log('destroy')
+  //     scroll?.removeListener(listener)
+  //   }
+  // }, [paginate])
+
+  
   return (
     <div className={styles.baseLayout}>
       <div className={styles.menuWrapper}>
@@ -25,10 +39,6 @@ export default function Layout({ children }: ILayoutProps) {
       </div>
       <div id="scrollbar" className={styles.pageWrapper}>
         <main>
-        <div className={'searchBlock'}>
-          <input type="text" placeholder="Поиск по названию" />
-          <button className='appButton'>Поиск</button>
-        </div>
           {children}
         </main>
       </div>

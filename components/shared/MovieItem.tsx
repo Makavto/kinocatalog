@@ -14,7 +14,7 @@ interface IMovieItemProps {
   year: string,
   rating?: string | null,
   expectationsRating: string | null,
-  type: MovieTypeEnum,
+  type: MovieTypeEnum | null,
   id: number
 }
 

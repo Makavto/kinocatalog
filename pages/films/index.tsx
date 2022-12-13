@@ -1,18 +1,15 @@
 import React from "react";
-import MovieItem from "../../components/shared/MovieItem";
 import MoviesItemsList from "../../components/shared/MoviesItemsList";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { topFilmsMock } from "../../mocks/topFilms.mock";
 import { NextThunkDispatch, wrapper } from "../../core/store";
 import { getFilmsAwait, getFilmsPopular, getFilmsTop } from "../../core/store/action-creators/films";
 import styles from "../../styles/pages/films/Index.module.scss";
-import { MovieTypeEnum } from "../../core/types/enums/MovieType.enum";
 
 function Films() {
   const {filmsAwait, filmsPopular, filmsTop} = useTypedSelector(state => state.films);
   return (
     <div>
-      <h2 className='mt-4 mb-2 bold'>Топ популярных фильмов</h2>
+      <h2 className='mb-2 bold'>Топ популярных фильмов</h2>
       {
         filmsPopular.value
         ? <MoviesItemsList moviesList={filmsPopular.value.items}/>

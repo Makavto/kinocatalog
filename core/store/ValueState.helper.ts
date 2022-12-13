@@ -5,6 +5,14 @@ export class ValueStateHelper {
     return {
       value: null,
       error: error,
+      loading: false
+    }
+  }
+
+  public static modelLoading<T>(stateObject: any): ValueState<T> {
+    return {
+      ...stateObject,
+      loading: true
     }
   }
 
@@ -12,6 +20,7 @@ export class ValueStateHelper {
     return {
       value: model,
       error: null,
+      loading: false
     }
   }
 }

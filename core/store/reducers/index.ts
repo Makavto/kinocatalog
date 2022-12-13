@@ -3,6 +3,8 @@ import { AnyAction, combineReducers } from "redux";
 import { filmsReducer } from "./filmsReducer";
 import { mainInitialState, mainReducer } from "./mainReducer";
 import { movieReducer } from "./movieReducer";
+import { scrollInitialState, scrollReducer } from "./scrollReducer";
+import { searchInitialState, searchReducer } from "./searchReducer";
 import { seriesInitialState, seriesReducer } from "./seriesReducer";
 
 const initialState: RootState = {
@@ -27,14 +29,18 @@ const initialState: RootState = {
     }
   },
   series: seriesInitialState,
-  main: mainInitialState
+  main: mainInitialState,
+  search: searchInitialState,
+  scroll: scrollInitialState
 }
 
 const rootReducer = combineReducers({
   films: filmsReducer,
   movie: movieReducer,
   series: seriesReducer,
-  main: mainReducer
+  main: mainReducer,
+  search: searchReducer,
+  scroll: scrollReducer
 })
 
 export const reducer = (state: RootState = initialState, action: any) => {
