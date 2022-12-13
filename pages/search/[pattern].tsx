@@ -12,13 +12,9 @@ interface ISearchPageProps {
   pattern: string
 }
 
-// const isBottom = (el: HTMLElement) => {
-//   return el.getBoundingClientRect().bottom <= window.innerHeight;
-// }
-
-function SearchPage({ pattern }: ISearchPageProps) {
-  const { moviesSearch } = useTypedSelector(state => state.search);
-  const { searchMovies } = useActions();
+function SearchPage({pattern}: ISearchPageProps) {
+  const {moviesSearch} = useTypedSelector(state => state.search);
+  const {searchMovies} = useActions();
   const [ref, isVisible] = useInView({
     threshold: 0
   });
