@@ -1,3 +1,4 @@
+const { withPlaiceholder } = require('@plaiceholder/next')
 const { hostname } = require('os')
 
 /** @type {import('next').NextConfig} */
@@ -22,4 +23,4 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+module.exports = withPlaiceholder(nextConfig)

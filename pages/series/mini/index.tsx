@@ -1,7 +1,5 @@
 import TabsList from "../../../components/series/TabsList";
-import MovieItem from "../../../components/shared/MovieItem";
 import MoviesItemsList from "../../../components/shared/MoviesItemsList";
-import { topFilmsMock } from "../../../mocks/topFilms.mock";
 import { MovieTypeEnum } from "../../../core/types/enums/MovieType.enum";
 import { wrapper, NextThunkDispatch } from "../../../core/store";
 import { getTopMiniSeries, getTopGenreMiniSeries, setSeriesGenre } from "../../../core/store/action-creators/series";

@@ -1,11 +1,18 @@
 import Image from "next/image";
-import { miniSeriesCoverMock } from "../../../mocks/mini-series-cover.mock";
-import { miniSeriesMock } from "../../../mocks/mini-series.mock";
+import { imagePlaceholderHelper } from "../../../core/helpers/imagePlaceholder.helper";
+import { wrapper, NextThunkDispatch } from "../../../core/store";
+import { getMovie } from "../../../core/store/action-creators/movie";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import styles from "../../../styles/pages/series/mini/MiniSeriesPage.module.scss";
 
 function MiniSeriesPage() {
-  // const series = miniSeriesMock;
-  const series = miniSeriesCoverMock;
+  const {movie} = useTypedSelector(state => state.movie);
+  if (!movie.value) {
+    return (
+      <div>{movie.error}</div>
+    )
+  }
+  const series = movie.value;
   let genres = '';
   let countries = '';
   series.genres.map((genre, i) => {
@@ -31,7 +38,16 @@ function MiniSeriesPage() {
               </div>
             </div>
           )
-          : <></>
+          : (
+            <div>
+              <h1 className="bold">
+                {series.nameRu}
+              </h1>
+              <h2 className="mb-4">
+                {series.nameOriginal} ({series.startYear} - {series.endYear})
+              </h2>
+            </div>
+          )
       }
       <div className={styles.descrBlock}>
         <Image className={styles.poster} src={series.posterUrl} alt='Постер' width={667} height={1000} />
@@ -112,3 +128,16 @@ function MiniSeriesPage() {
 }
 
 export default MiniSeriesPage;
+
+export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ params }) => {
+  const dispatch = store.dispatch as NextThunkDispatch;
+  const image = await dispatch(getMovie(params!.id!)).then(async () => {
+    const { movie } = store.getState().movie;
+    return imagePlaceholderHelper().getPlaceholder(movie.value?.coverUrl);
+  }).then(value => value);
+  return {
+    props: {
+      imageProps: image
+    }
+  }
+})

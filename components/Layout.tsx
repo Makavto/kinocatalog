@@ -14,24 +14,8 @@ interface ILayoutProps {
 export default function Layout({ children }: ILayoutProps) {
   const router = useRouter();
 
-  const {paginate} = useTypedSelector(state => state.scroll);
-
-  const [pag, setPag] = React.useState(false);
-
-  const {setPaginate} = useActions();
-
-  let scroll: Scrollbar | null = null;
-
-  const listener = (status: ScrollStatus) => {
-    if (status.limit.y - status.offset.y < 100) {
-      setPaginate(true);
-      setPag(true)
-      console.log(pag, paginate)
-    }
-  }
-
   React.useEffect(() => {
-    scroll = Scrollbar.init(document.getElementById('scrollbar')!);
+    let scroll = Scrollbar.init(document.getElementById('scrollbar')!);
     scroll.track.xAxis.element.remove();
     return () => {
       if (scroll)
@@ -39,13 +23,13 @@ export default function Layout({ children }: ILayoutProps) {
     }
   }, [router.pathname]);
 
-  React.useEffect(() => {
-    scroll?.addListener(listener)
-    return () => {
-      console.log('destroy')
-      scroll?.removeListener(listener)
-    }
-  }, [paginate])
+  // React.useEffect(() => {
+  //   scroll?.addListener(listener)
+  //   return () => {
+  //     console.log('destroy')
+  //     scroll?.removeListener(listener)
+  //   }
+  // }, [paginate])
 
   
   return (
