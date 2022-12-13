@@ -1,9 +1,7 @@
 import TabsList from '../../components/series/TabsList';
-import MovieItem from '../../components/shared/MovieItem';
 import MoviesItemsList from '../../components/shared/MoviesItemsList';
 import { getRandomGenre } from '../../core/helpers/randomGenre.helper';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { topFilmsMock } from '../../mocks/topFilms.mock';
 import { NextThunkDispatch, wrapper } from '../../core/store';
 import { getTopGenreSeries, getTopSeries, setSeriesGenre } from '../../core/store/action-creators/series';
 import styles from '../../styles/pages/series/Index.module.scss';

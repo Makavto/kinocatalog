@@ -1,4 +1,5 @@
 import React from "react";
+import { useInView } from "react-hook-inview";
 import MovieItem from "../../components/shared/MovieItem";
 import { NextThunkDispatch, wrapper } from "../../core/store";
 import { searchMovies } from "../../core/store/action-creators/search";
@@ -10,22 +11,31 @@ interface ISearchPageProps {
   pattern: string
 }
 
-const isBottom = (el: HTMLElement) => {
-  return el.getBoundingClientRect().bottom <= window.innerHeight;
-}
+// const isBottom = (el: HTMLElement) => {
+//   return el.getBoundingClientRect().bottom <= window.innerHeight;
+// }
 
 function SearchPage({pattern}: ISearchPageProps) {
   const {moviesSearch} = useTypedSelector(state => state.search);
-  const {paginate, pending, endPaginate} = useTypedSelector(state => state.scroll);
-  const {setPaginate, setPending, searchMovies, setEndPaginate} = useActions();
+  const {searchMovies} = useActions();
+  const [ref, isVisible] = useInView({
+    threshold: 0
+  });
+
+  React.useEffect(() => {
+    if (isVisible && moviesSearch.value) {
+      searchMovies(pattern, moviesSearch.value?.page + 1)
+    }
+  }, [isVisible])
+
   return (
     <>
     <h1 className="mb-4">Результаты поиска по запросу «{pattern}»</h1>
     <div className="d-flex flex-wrap" id="list-container">
       {
         moviesSearch.value
-          ? moviesSearch.value.items.map(movie => (
-            <div key={movie.filmId} className={'movieItemWrapper'}>
+          ? moviesSearch.value.items.map((movie, i, items) => (
+            <div ref={i + 1 == items.length ? ref : undefined} key={movie.filmId} className={'movieItemWrapper'}>
               <MovieItem
                 expectationsRating={movie.expectationsRating}
                 id={movie.filmId}

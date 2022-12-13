@@ -1,19 +1,17 @@
-import { seasonsMock } from "../../mocks/seasons.mock";
-import { seriesMock } from "../../mocks/series.mock";
 import Image from "next/image";
 import styles from "../../styles/pages/series/SeriesPage.module.scss";
 import { NextThunkDispatch, wrapper } from "../../core/store";
 import { getMovie } from "../../core/store/action-creators/movie";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { InferGetServerSidePropsType } from "next";
+import { imagePlaceholderHelper } from "../../core/helpers/imagePlaceholder.helper";
 
-function SeriesPage() {
-  // const series = seriesMock;
-  const season = seasonsMock;
+function SeriesPage({ imageProps }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { movie } = useTypedSelector(state => state.movie)
   if (!movie.value) {
     return (
       <div>{movie.error}</div>
-      )
+    )
   }
   let genres = '';
   let countries = '';
@@ -27,10 +25,15 @@ function SeriesPage() {
   return (
     <div>
       {
-        series.coverUrl
+        series.coverUrl && imageProps
           ? (
             <div className={styles.cover}>
-              <Image className={styles.image} src={series.coverUrl} alt='Обложка' width={1920} height={1080} />
+              <Image
+                className={styles.image}
+                alt='Обложка'
+                {...imageProps}
+                placeholder='blur'
+              />
               <div className={styles.coverBlock}>
                 <h1 className={styles.heading}>
                   {series.nameRu}
@@ -127,6 +130,13 @@ export default SeriesPage;
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ params }) => {
   const dispatch = store.dispatch as NextThunkDispatch;
-  await dispatch(getMovie(params!.id!))
-  return { props: {} }
+  const image = await dispatch(getMovie(params!.id!)).then(async () => {
+    const { movie } = store.getState().movie;
+    return imagePlaceholderHelper().getPlaceholder(movie.value?.coverUrl);
+  }).then(value => value);
+  return {
+    props: {
+      imageProps: image
+    }
+  }
 })

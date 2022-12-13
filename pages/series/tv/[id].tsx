@@ -1,9 +1,18 @@
 import Image from "next/image";
-import { tvseriesMock } from "../../../mocks/tv-series.mock";
+import { imagePlaceholderHelper } from "../../../core/helpers/imagePlaceholder.helper";
+import { wrapper, NextThunkDispatch } from "../../../core/store";
+import { getMovie } from "../../../core/store/action-creators/movie";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import styles from "../../../styles/pages/series/tv/TvSeriesPage.module.scss";
 
 function TvSeriesPage() {
-  const series = tvseriesMock;
+  const { movie } = useTypedSelector(state => state.movie);
+  if (!movie.value) {
+    return (
+      <div>{movie.error}</div>
+    )
+  }
+  const series = movie.value!;
   let genres = '';
   let countries = '';
   series.genres.map((genre, i) => {
@@ -14,17 +23,6 @@ function TvSeriesPage() {
   })
   return (
     <div>
-      {/* <div className={styles.cover}>
-        <Image className={styles.image} src={series.coverUrl} alt='Обложка' width={1920} height={1080} />
-        <div className={styles.coverBlock}>
-          <h1 className={styles.heading}>
-            {series.nameRu}
-          </h1>
-          <h2 className={styles.subHeading}>
-            {series.nameOriginal} ({series.year})
-          </h2>
-        </div>
-      </div> */}
       <div className={styles.descrBlock}>
         <Image className={styles.poster} src={series.posterUrl} alt='Постер' width={667} height={1000} />
         <div className={styles.textBlock}>
@@ -92,3 +90,16 @@ function TvSeriesPage() {
 }
 
 export default TvSeriesPage;
+
+export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ params }) => {
+  const dispatch = store.dispatch as NextThunkDispatch;
+  const image = await dispatch(getMovie(params!.id!)).then(async () => {
+    const { movie } = store.getState().movie;
+    return imagePlaceholderHelper().getPlaceholder(movie.value?.coverUrl);
+  }).then(value => value);
+  return {
+    props: {
+      imageProps: image
+    }
+  }
+})
