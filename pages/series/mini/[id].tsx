@@ -1,3 +1,4 @@
+import { InferGetServerSidePropsType } from "next";
 import Image from "next/image";
 import { imagePlaceholderHelper } from "../../../core/helpers/imagePlaceholder.helper";
 import { wrapper, NextThunkDispatch } from "../../../core/store";
@@ -5,8 +6,8 @@ import { getMovie } from "../../../core/store/action-creators/movie";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import styles from "../../../styles/pages/series/mini/MiniSeriesPage.module.scss";
 
-function MiniSeriesPage() {
-  const {movie} = useTypedSelector(state => state.movie);
+function MiniSeriesPage({ imageProps }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  const { movie } = useTypedSelector(state => state.movie);
   if (!movie.value) {
     return (
       <div>{movie.error}</div>
@@ -24,10 +25,14 @@ function MiniSeriesPage() {
   return (
     <div>
       {
-        series.coverUrl
+        series.coverUrl && imageProps
           ? (
             <div className={styles.cover}>
-              <Image className={styles.image} src={series.coverUrl} alt='Обложка' width={1920} height={1080} />
+              <Image
+                className={styles.image}
+                alt='Обложка'
+                {...imageProps}
+                placeholder='blur' />
               <div className={styles.coverBlock}>
                 <h1 className={styles.heading}>
                   {series.nameRu}
@@ -87,13 +92,13 @@ function MiniSeriesPage() {
           {
             series.filmLength
               ? <>
-                  <div className={styles.subHeading}>
-                    Длительность
-                  </div>
-                  <div className="mb-3">
-                    {series.filmLength} мин
-                  </div>
-                </>
+                <div className={styles.subHeading}>
+                  Длительность
+                </div>
+                <div className="mb-3">
+                  {series.filmLength} мин
+                </div>
+              </>
               : <></>
           }
 

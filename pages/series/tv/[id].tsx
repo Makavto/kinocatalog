@@ -93,13 +93,6 @@ export default TvSeriesPage;
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ params }) => {
   const dispatch = store.dispatch as NextThunkDispatch;
-  const image = await dispatch(getMovie(params!.id!)).then(async () => {
-    const { movie } = store.getState().movie;
-    return imagePlaceholderHelper().getPlaceholder(movie.value?.coverUrl);
-  }).then(value => value);
-  return {
-    props: {
-      imageProps: image
-    }
-  }
+  await dispatch(getMovie(params!.id!))
+  return { props: {} }
 })
