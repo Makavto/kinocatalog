@@ -5,9 +5,11 @@ import { getMovie } from "../../core/store/action-creators/movie";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { InferGetServerSidePropsType } from "next";
 import { imagePlaceholderHelper } from "../../core/helpers/imagePlaceholder.helper";
+import { useParallax } from "../../hooks/useParallax";
 
 function SeriesPage({ imageProps }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const { movie } = useTypedSelector(state => state.movie)
+  const { movie } = useTypedSelector(state => state.movie);
+  useParallax();
   if (!movie.value) {
     return (
       <div>{movie.error}</div>
@@ -28,12 +30,15 @@ function SeriesPage({ imageProps }: InferGetServerSidePropsType<typeof getServer
         series.coverUrl && imageProps
           ? (
             <div className={styles.cover}>
-              <Image
-                className={styles.image}
-                alt='Обложка'
-                {...imageProps}
-                placeholder='blur'
-              />
+              <div className={styles.coverParallax}>
+                <Image
+                  className={styles.image}
+                  alt='Обложка'
+                  {...imageProps}
+                  placeholder='blur'
+                  id="parallax"
+                  />
+              </div>
               <div className={styles.coverBlock}>
                 <h1 className={styles.heading}>
                   {series.nameRu}

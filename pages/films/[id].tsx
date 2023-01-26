@@ -5,10 +5,13 @@ import { NextThunkDispatch, wrapper } from "../../core/store";
 import { getMovie } from "../../core/store/action-creators/movie";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { imagePlaceholderHelper } from "../../core/helpers/imagePlaceholder.helper";
+import React from "react";
+import { useParallax } from "../../hooks/useParallax";
 
 
 function FilmPage({ imageProps }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const { movie } = useTypedSelector(state => state.movie)
+  const { movie } = useTypedSelector(state => state.movie);
+  useParallax();
   if (!movie.value) {
     return (
       <div>{movie.error}</div>
@@ -19,22 +22,25 @@ function FilmPage({ imageProps }: InferGetServerSidePropsType<typeof getServerSi
   let countries = '';
   film.genres.map((genre, i) => {
     i == 0 ? genres = genre.genre : genres = genres.concat(`, ${genre.genre}`)
-  })
+  });
   film.countries.map((country, i) => {
     i == 0 ? countries = country.country : countries = countries.concat(`, ${country.country}`)
-  })
+  });
   return (
     <div>
       {
         film.coverUrl && imageProps
           ? (
             <div className={styles.cover}>
-              <Image
-                className={styles.image}
-                alt='Обложка'
-                {...imageProps}
-                placeholder='blur'
-                />
+              <div className={styles.coverParallax}>
+                <Image
+                  className={styles.image}
+                  alt='Обложка'
+                  {...imageProps}
+                  placeholder='blur'
+                  id="parallax"
+                  />
+              </div>
               <div className={styles.coverBlock}>
                 <h1 className={styles.heading}>
                   {film.nameRu}
