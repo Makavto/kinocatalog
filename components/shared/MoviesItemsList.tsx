@@ -45,12 +45,18 @@ function MoviesItemsList({ moviesList }: IMoviesItemsList) {
           1800: {
             slidesPerView: 6
           },
-          1550: {
+          1200: {
             slidesPerView: 5
           },
-          1300: {
+          900: {
             slidesPerView: 4
-          }
+          },
+          700: {
+            slidesPerView: 3
+          },
+          500: {
+            slidesPerView: 2
+          },
         }}
       >
         {

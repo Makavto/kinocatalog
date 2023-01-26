@@ -5,6 +5,7 @@ export const API_1 = 'https://kinopoiskapiunofficial.tech/api/v1';
 
 export const API_KEY = '430bad06-1003-42b9-ba00-42b731bb7d51';
 export const API_KEY_2 = 'f514f846-7b78-4874-90a1-94e11a6d1e65';
+export const API_KEY_3 = 'de00dbeb-099e-470a-afe7-daa4da011be7';
 
 export const MONTHS = [
   'JANUARY',
