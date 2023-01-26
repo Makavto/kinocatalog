@@ -35,5 +35,5 @@ export const getStaticProps = wrapper.getStaticProps((store) => async () => {
   dispatch(setSeriesGenre(genre));
   await dispatch(getTopMiniSeries());
   await dispatch(getTopGenreMiniSeries(genre!.id));
-  return {props: {}, revalidate: 30}
+  return {props: {}, revalidate: 3600}
 })
