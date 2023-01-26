@@ -66,10 +66,16 @@ export default function Layout({ children }: ILayoutProps) {
   
   return (
     <div className={styles.baseLayout}>
-      <button className={styles.menuButton} onClick={onMenuToggle}>
-        <div className={styles.line}></div>
-        <div className={styles.line}></div>
-        <div className={styles.line}></div>
+      <button className={cx(styles.menuButton, {active: menuOpened})} onClick={onMenuToggle}>
+        <div className={styles.line}>
+          <div className={cx(styles.accent, styles.slow)}></div>
+        </div>
+        <div className={styles.line}>
+          <div className={styles.accent}></div>
+        </div>
+        <div className={styles.line}>
+          <div className={cx(styles.accent, styles.fast)}></div>
+        </div>
       </button>
       <div className={cx(styles.menuWrapper, {opened: menuOpened})}>
         <Menu />

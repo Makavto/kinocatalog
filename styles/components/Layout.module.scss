@@ -18,9 +18,36 @@
     z-index: 100;
 
     .line {
-      height: 2px;
+      height: 3px;
       width: 100%;
       background: $primary-color-dark;
+      position: relative;
+
+      .accent {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        background-color: $accent-color-2;
+        transition-property: width;
+        transition-timing-function: ease-in-out;
+        transition-duration: .4s;
+
+        &.slow {
+          transition-duration: .2s;
+        }
+
+        &.fast {
+          transition-duration: .6s;
+        }
+      }
+    }
+
+    &.active {
+      .accent {
+        width: 100%;
+      }
     }
   }
 }
@@ -36,7 +63,9 @@
     width: 100%;
     max-width: 600px;
     z-index: 99;
-    transition: transform .3s ease-in-out;
+    box-shadow: 12px 5px 12px 4px rgba($color: #000, $alpha: 0.25);
+
+    transition: transform .4s ease-in-out;
 
     &.opened {
       transform: translateX(0);
