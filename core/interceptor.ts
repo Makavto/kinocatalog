@@ -5,7 +5,7 @@ export const http = axios.create();
 
 http.interceptors.request.use(req => {
   req.headers = {
-    'X-API-KEY': API_KEY,
+    'X-API-KEY': API_KEY_2,
     'Content-Type': 'application/json; charset=utf-8',
     Accept: 'application/json',
     'Accept-Encoding': 'identity'
