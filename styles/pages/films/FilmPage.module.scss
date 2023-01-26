@@ -3,15 +3,23 @@
 .cover {
   margin-bottom: 160px;
   width: 100%;
-  height: auto;
   position: relative;
 
-  .image {
+  &Parallax {
     width: 100%;
     border-radius: 10px;
     overflow: hidden;
-    height: auto;
+    height: 1000px;
+    position: relative;
     filter: grayscale(25%) contrast(110%);
+  }
+
+  .image {
+    top: 0;
+    left: 0;
+    width: 110%;
+    transition: transform .1s ease;
+    height: auto;
   }
 
   &::after {
@@ -44,6 +52,7 @@
     .heading {
       color: $primary-color;
       font-size: 3rem;
+      text-align: center;
     }
 
     .subHeading {

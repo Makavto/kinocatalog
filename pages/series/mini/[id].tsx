@@ -3,11 +3,13 @@ import Image from "next/image";
 import { imagePlaceholderHelper } from "../../../core/helpers/imagePlaceholder.helper";
 import { wrapper, NextThunkDispatch } from "../../../core/store";
 import { getMovie } from "../../../core/store/action-creators/movie";
+import { useParallax } from "../../../hooks/useParallax";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import styles from "../../../styles/pages/series/mini/MiniSeriesPage.module.scss";
 
 function MiniSeriesPage({ imageProps }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { movie } = useTypedSelector(state => state.movie);
+  useParallax();
   if (!movie.value) {
     return (
       <div>{movie.error}</div>
@@ -28,11 +30,15 @@ function MiniSeriesPage({ imageProps }: InferGetServerSidePropsType<typeof getSe
         series.coverUrl && imageProps
           ? (
             <div className={styles.cover}>
-              <Image
-                className={styles.image}
-                alt='Обложка'
-                {...imageProps}
-                placeholder='blur' />
+              <div className={styles.coverParallax}>
+                <Image
+                  className={styles.image}
+                  alt='Обложка'
+                  {...imageProps}
+                  placeholder='blur'
+                  id="parallax"
+                  />
+              </div>
               <div className={styles.coverBlock}>
                 <h1 className={styles.heading}>
                   {series.nameRu}
