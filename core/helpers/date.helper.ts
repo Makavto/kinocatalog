@@ -6,6 +6,6 @@ export class DateHelper {
   }
 
   public static getMonthForRequest() {
-    return MONTHS[new Date().getMonth() - 1]
+    return MONTHS[new Date().getMonth()]
   }
 }
